@@ -1,0 +1,68 @@
+
+.contenedor1{
+  background-image:url("imagenes/libros.jpg");
+  background-repeat:no-repeat;
+  background-size: cover;
+  }
+  .contenedor2{
+    
+    display: flex;
+    align-items: center;
+    background-color: beige;
+
+  }
+  .list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+.contenedorlist{
+  background-image: url("imagenes/editadolibros.jpg");
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+.contenedor4{
+  margin: 10px;
+  width: 700px;
+}
+.contenedor3{
+  margin: 100px auto ;
+ 
+  width: 1250px;
+}
+.formulario{
+  
+  width: 150px ;
+}
+.nota{
+  height: 200px;
+  width: 400px;
+  background-color: bisque;
+
+}
+.modificar{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+  margin-right: 1000px ;
+  margin: 100px ;
+ 
+}
+
+#main-container2{
+  margin: 100px auto;
+  width:700px;
+}
+#main-container{
+/*  align-items: center;*/
+  margin: 100px auto;
+  width: 1200px;
+}
+table{
+  width: 100%;
+  text-align: left;
+  background-color: blanchedalmond;
+}
+th,td{
+  padding: 15px;
+}

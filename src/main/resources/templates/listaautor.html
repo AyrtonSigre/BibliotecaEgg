@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Lista Autores</title>
+</head>
+
+<body class="contenedorlist">
+    <div class="list">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="http://127.0.0.1:5500/libreria/">Libreria M. Reveals</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Libros
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/libro/lista}">Listado</a>
+                            <a class="dropdown-item" th:href="@{/libro/editarlibro}">Editar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/autores">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/editoriales">Editoriales</a>
+                    </li>
+                    <li class="nav-item dropdown"></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="contenedor3">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading"> Lista de Autores!</h4>
+                 <a class="button" th:href="@{/autor/agregarautor}">Agregar Autores</a>
+                <div id="main-container">
+                    <table>
+                        <thead>
+                            <tr class="table-active">
+                                <th scope="col">id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="autor : ${autores}">
+                            <tr>
+                                <td th:text="${autor.id}"></td>
+                                <td th:text="${autor.nombre}"></td>
+                                <td style="text-align: center;;">
+                                    <i th:if="${autor.alta}" class="bi bi-dash-square-fill"
+                                        style="color:greenyellow;"></i>
+                                    <i th:unless="${autor.alta}" class="bi bi-dash-square-fill" style="color: red;"></i>
+                                </td>
+
+                                <td>
+
+                                    <a th:href="@{/autor/baja/__${autor.id}__}"><i class="bi bi-file-arrow-down-fill"></i></a>
+                                    <a th:href="@{/autor/alta/__${autor.id}__}"><i class="bi bi-file-arrow-up"></i></a>
+                                    <a th:href="@{/autor/modificar/__${autor.id}__}"> <i class="bi bi-pen"></i></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: linen;">
+            <blockquote class="blockquote text-center">
+                
+                <footer class="blockquote-footer">Ayrton Sigre <cite title="Source Title">since 2021</cite></footer>
+            </blockquote>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
