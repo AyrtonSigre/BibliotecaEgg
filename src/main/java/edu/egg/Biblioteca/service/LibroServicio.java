@@ -61,8 +61,9 @@ public class LibroServicio {
     }
 
     @Transactional
-    public void modificarlibro(String id, String isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresp,Autor autor) throws Excepciondeservicio {
-
+    public void modificarlibro(String id, String isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresp,String idautor) throws Excepciondeservicio {
+        
+        Autor autor = repositorioautor.findById(idautor).get();
 
         Optional<Libro> respuesta = repositoriolibro.findById(id);
         if (respuesta.isPresent()) {

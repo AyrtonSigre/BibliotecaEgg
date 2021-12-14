@@ -34,7 +34,7 @@ public class ControladorLibro {
     public String editarlibro(ModelMap modelo) {
         List<Autor> autores = servicioautor.listadoAutores();
         modelo.put("autores", autores);
-        return "editarlibros.html";
+        return "crearlibro.html";
     }
 
     @PostMapping("/editarlibro")
@@ -47,7 +47,7 @@ public class ControladorLibro {
             return "editarlibros.html";
         } catch (Excepciondeservicio e) {
             modelo.put("error", "Faltan datos!");
-            return "editarlibros.html";
+            return "crearlibro.html";
         }
     }
 
@@ -74,20 +74,28 @@ public class ControladorLibro {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, @RequestParam String isbn, @RequestParam String titulo, Integer anio, Integer ejemplares,Integer ejemplaresp,Autor autor) {
+    public String modificar(ModelMap modelo,@PathVariable String id, @RequestParam String isbn, @RequestParam String titulo, Integer anio, Integer ejemplares,Integer ejemplaresp,String idautor) {
         try {
 
-            if (serviciolibro.buscarporid(id) != null) {
-                serviciolibro.modificarlibro(id, isbn, titulo, anio, ejemplares, ejemplaresp,autor);
-            } else {
-                throw new Excepciondeservicio("No puede haber variable vacia");
-            }
+                serviciolibro.modificarlibro(id, isbn, titulo, anio, ejemplares, ejemplaresp,idautor);
+            
 
             return  "redirect:/libro/lista";
-        } catch (Exception e) {
-
-            return "modificarl.html";
+        } catch (Excepciondeservicio ex) {
+         modelo.put("error", ex.getMessage());
+            return "redirect:/lista";
         }
+        
+//      System.out.println("id: " + id);
+//        System.out.println("titulo: " + titulo);
+//      try{
+//        libroservicio.modificarLibro(id, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, idAutor, idEditorial);
+//      }catch (ErrorServicio ex){
+//        
+//      }
+//  return "redirect:/libros";   
+//        
+        
     }
 @GetMapping("/baja/{id}")
 public String baja(@PathVariable String id) throws Excepciondeservicio{

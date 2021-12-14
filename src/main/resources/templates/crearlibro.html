@@ -73,6 +73,7 @@
 
                     <h4 class="alert-heading"> Agrega tu libro!</h4>
                     <form th:action ="@{/libro/editarlibro}" method="POST">
+      
                         <div class="form-group">
                             <label >Isbn</label>
                             <input type="text" class="form-control" name= "isbn" >
@@ -93,13 +94,20 @@
                             <label >Ejemplares Prestados</label>
                             <input type="number" class="form-control" name="ejemplaresp" >
                         </div>
-                        <label>Autores</label>    
+                        <label for="nombre">Autores</label>    
                         <div class="form-group">
-                        <select class="custom-select">
-                          <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}" name="idautor"></option>
+                        <select class="custom-select" name="idautor" id="">
+                            <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}">
+                                Seleccione un autor
+                            </option>
                         </select>
                         </div>
-<!--                  
+<!--             <label for="nombre">Autor:</label>
+                    <select class="selected" name="idAutor" id="">
+                        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}">
+                            Seleccione un Autor
+                        </option>
+                    </select>    
                             <label>Editorial</label>
                             <input type="text" class="form-control" name="editorial" >
                         </div>-->

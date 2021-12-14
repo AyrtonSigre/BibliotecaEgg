@@ -72,8 +72,8 @@
                     <h4 class="alert-heading"> Modifica el libro!</h4>
 
                     <form  th:action="@{/libro/modificar/__${libro.id}__}" method="POST">
-                        <div> <input hidden th:value="${id}" name="id">
-                        </div>
+                        <input type="hidden" name="id" th:value="${libro.id}">
+
                         <div class="form-group">
                             <label >Isbn</label>
                             <input type="text" th:value="${libro.isbn}"class="form-control" name= "isbn" >
@@ -94,25 +94,20 @@
                             <label >Ejemplares Prestados</label>
                             <input type="number"  th:value="${libro.ejemplaresP}"class="form-control" name="ejemplaresp" >
                         </div>
-                       
-                      <div class="form-group">
-                           <label>Autores</label>
-                            <select class="custom-select">
-                                <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}" name="id_autor"></option>
+
+                        <div class="form-group">
+                            <label for="nombre">Autores</label>
+                            <select class="custom-select" name="idAutor" id="nombre">
+                                <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"
+                                         th:selected="${libro.autor != null && autor.id == libro.autor.id}">
+                                    Seleccione un
+                                    Autor
+                                </option>
                             </select>
-                      </div>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <!--<div class="form-group">
-                            <label >Autor</label>
-                            <select name="Lista de autores" th:each="autor:${autores}">
-                            <option th:text="${autor.nombre}"></option>
-                            </select>
-                        </div>               
-                        <div class="form-group">
-                            <label>Editorial</label>
-                            <input type="text" class="form-control" name="editorial" >
-                        </div>                                                      -->
+
 
                     </form>
                 </div>
