@@ -38,11 +38,11 @@ public class ControladorLibro {
     }
 
     @PostMapping("/editarlibro")
-    public String guardarlibro(ModelMap modelo, @RequestParam String isbn, @RequestParam String titulo, Integer anio, Integer ejemplares, Integer ejemplaresp,Autor autor) {
-//            @RequestParam Autor autor,@RequestParam Editorial editorial
+    public String guardarlibro(ModelMap modelo, @RequestParam String isbn, @RequestParam String titulo, Integer anio, Integer ejemplares, Integer ejemplaresp,String idautor) {
+//             Autor autor,@RequestParam Editorial editorial
 
         try {
-            serviciolibro.AgregarLibro(isbn, titulo, anio, ejemplares, ejemplaresp,autor);
+            serviciolibro.AgregarLibro(isbn, titulo, anio, ejemplares, ejemplaresp,idautor);
             modelo.put("exito", "libro cargado exitosamente!");
             return "editarlibros.html";
         } catch (Excepciondeservicio e) {

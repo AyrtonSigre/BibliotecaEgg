@@ -8,6 +8,7 @@ package edu.egg.Biblioteca.service;
 import edu.egg.Biblioteca.ExcepcionesServicio.Excepciondeservicio;
 import edu.egg.Biblioteca.entity.Autor;
 import edu.egg.Biblioteca.entity.Libro;
+import edu.egg.Biblioteca.repository.AutorRepositorio;
 import edu.egg.Biblioteca.repository.LibroRepositorio;
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +21,14 @@ public class LibroServicio {
 
     @Autowired
     private LibroRepositorio repositoriolibro;
+    @Autowired
+    private AutorRepositorio repositorioautor;
 
     @Transactional
-    public Libro AgregarLibro(String isbn, String nombre, Integer anio, Integer ejemplares, Integer ejemplaresp, Autor autor) throws Excepciondeservicio {
+    public Libro AgregarLibro(String isbn, String nombre, Integer anio, Integer ejemplares, Integer ejemplaresp, String autorid) throws Excepciondeservicio {
         vallidacion(nombre, isbn, anio, ejemplares);
-
+        Autor autor= repositorioautor.findById(autorid).get();
+    
         Libro libro = new Libro();
         libro.setIsbn(isbn);
         libro.setTitulo(nombre);
@@ -32,34 +36,14 @@ public class LibroServicio {
         libro.setEjemplares(ejemplares);
         libro.setEjemplaresP(ejemplaresp);
         libro.setEjemplaresR(ejemplares-ejemplaresp);
-
         libro.setAutor(autor);
         libro.setEditorial(null);
         libro.setAlta(true);
 
-        return repositoriolibro.save(libro);//save es un metodo de la clase que estiende JPArepository y sirve para guardarlo en BD 
-        //El repositorio es el que se va a encargar de almacenar ese objeto en una o mas tablas
+        return repositoriolibro.save(libro);
 
     }
-//
-//    public int calculor(int ejemplares, int ejemplaresp) {
-//        int ejemplaresr;
-//        if (ejemplaresp == 0) {
-//            return 0;
-//        } else {
-//            if (ejemplaresp != 0) {
-//                ejemplaresr = ejemplares - ejemplaresp;
-//                return ejemplaresr;
-//            }
-//            if (ejemplares == 0) {
-//                return 0;
-//            } else {
-//                ejemplaresr = ejemplares - ejemplaresp;
-//                return ejemplaresr;
-//            }
-//
-//        }
-//    }
+
 
     @Transactional
     public Libro validarmodificacion(String isbn, String titulo) throws Excepciondeservicio {
@@ -79,7 +63,7 @@ public class LibroServicio {
     @Transactional
     public void modificarlibro(String id, String isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresp,Autor autor) throws Excepciondeservicio {
 
-//        validarmodificacion(isbn, titulo);
+
         Optional<Libro> respuesta = repositoriolibro.findById(id);
         if (respuesta.isPresent()) {
             Libro libro = respuesta.get();
@@ -157,11 +141,6 @@ public class LibroServicio {
         if (ejemplares == null) {
             throw new Excepciondeservicio("La cantidad de ejemplares no puede ser nula");
         }
-//        if (autor == null) {
-//            throw new Excepciondeservicio("el/la autora no puede ser nula/o");
-//        }
-//        if (editorial == null) {
-//            throw new Excepciondeservicio("La Editorial no puede ser nula");
-//        }
+
     }
 }
