@@ -71,6 +71,8 @@
 
                     <h4 class="alert-heading"> Modifica el libro!</h4>
 
+
+
                     <form  th:action="@{/libro/modificar/__${libro.id}__}" method="POST">
                         <input type="hidden" name="id" th:value="${libro.id}">
 
@@ -97,11 +99,9 @@
 
                         <div class="form-group">
                             <label for="nombre">Autores</label>
-                            <select class="custom-select" name="idAutor" id="nombre">
+                            <select class="custom-select" name="idautor" id="">
                                 <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}"
-                                         th:selected="${libro.autor != null && autor.id == libro.autor.id}">
-                                    Seleccione un
-                                    Autor
+                                        th:selected="${libro.autor != null && autor.id == libro.autor.id}">
                                 </option>
                             </select>
                         </div>

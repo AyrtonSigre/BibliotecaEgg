@@ -34,7 +34,8 @@ public class ControladorLibro {
     public String editarlibro(ModelMap modelo) {
         List<Autor> autores = servicioautor.listadoAutores();
         modelo.put("autores", autores);
-        return "crearlibro.html";
+      
+        return "editarlibros.html";
     }
 
     @PostMapping("/editarlibro")
@@ -47,14 +48,15 @@ public class ControladorLibro {
             return "editarlibros.html";
         } catch (Excepciondeservicio e) {
             modelo.put("error", "Faltan datos!");
-            return "crearlibro.html";
+            return "editarlibros.html";
         }
     }
 
     @GetMapping("/lista")
     public String listar(ModelMap modelo) {
         Collection<Libro> libros = serviciolibro.listadoLibros();
-        modelo.put("libros", libros);
+        modelo.put("libros", libros);    List<Autor> autores = servicioautor.listadoAutores();
+       
         return "listado.html";
     }
 
@@ -74,7 +76,7 @@ public class ControladorLibro {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(ModelMap modelo,@PathVariable String id, @RequestParam String isbn, @RequestParam String titulo, Integer anio, Integer ejemplares,Integer ejemplaresp,String idautor) {
+    public String modificar(@PathVariable String id,ModelMap modelo, @RequestParam String isbn, @RequestParam String titulo, Integer anio, Integer ejemplares,Integer ejemplaresp,String idautor) {
         try {
 
                 serviciolibro.modificarlibro(id, isbn, titulo, anio, ejemplares, ejemplaresp,idautor);

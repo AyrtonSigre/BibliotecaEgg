@@ -8,6 +8,7 @@ package edu.egg.Biblioteca.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,6 +26,7 @@ public class Libro {
     private Integer ejemplaresR;
     private boolean alta;
     @ManyToOne
+    @JoinColumn
     private Autor autor;
     @ManyToOne
     private Editorial editorial;

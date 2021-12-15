@@ -17,7 +17,7 @@
     <body class="contenedorlist">
         <div class="list">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="http://127.0.0.1:5500/libreria/">Libreria M. Reveals</a>
+                <a class="navbar-brand" href="localhost:9090">Libreria M. Reveals</a>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -81,7 +81,7 @@
                                     <td th:text="${libro.ejemplares}"></td>
                                     <td th:text="${libro.ejemplaresP}"></td>
                                     <td th:text="${libro.ejemplaresR}"></td>
-                                    <td th:text="${libro.autor}"></td>
+                                    <td th:text="${libro.autor} == null ? 'sin registro' : ${libro.autor.nombre} "</td>
                                     <td th:text="${libro.editorial}"></td>
                                     <td>
                                         <i th:if="${libro.alta}" class="bi bi-dash-square-fill"  style="color:greenyellow;"></i>
